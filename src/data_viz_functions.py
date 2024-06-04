@@ -44,6 +44,47 @@ def plot_distributions(df):
     plt.show()
 
 
+# Count and Plot the occurrences of a numerical feature with count greater than a threshold
+def filter_and_plot_feature(df_train, feature_name, threshold):
+
+  feature_counts = df_train[feature_name].value_counts()
+
+  values_gt_threshold = feature_counts[feature_counts > threshold]
+
+  plt.figure(figsize=(15, 8))
+  sns.barplot(x=values_gt_threshold.index, y=values_gt_threshold.values, palette="viridis", hue=values_gt_threshold.index, legend=False)
+  plt.title(f"{feature_name} with Counts Greater than {threshold}")
+  plt.xlabel(feature_name)
+  plt.ylabel('Count')
+  plt.xticks(rotation=0)
+  plt.show()
+
+# Violin plots for numerical feature distirbutions
+def plot_violin(df):
+
+    numeric_cols = df.select_dtypes(exclude=['object']).columns
+
+    numeric_cols = numeric_cols.drop(['Driving_License', 'Previously_Insured', 'Response'])
+
+    num_cols = 3  
+    num_rows = (len(numeric_cols) + num_cols - 1) // num_cols
+
+    fig, axes = plt.subplots(num_rows, num_cols, figsize=(20, 7 * num_rows))
+    axes = axes.flatten() 
+
+    for i, col in enumerate(numeric_cols):
+        ax = axes[i]
+        sns.violinplot(data=df, y=col, ax=ax, color='lightblue')
+        ax.set_title(f'Violin Plot for {col}')
+
+    plt.subplots_adjust(hspace=0.3)
+
+    for j in range(i + 1, len(axes)):
+        fig.delaxes(axes[j])
+
+    plt.show()
+
+
 # Plot the heatmap for correlations
 def plot_correlation_heatmap(corr_matrix):
     plt.figure(figsize=(12, 8))
