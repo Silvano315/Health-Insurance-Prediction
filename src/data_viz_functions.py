@@ -64,7 +64,10 @@ def plot_violin(df):
 
     numeric_cols = df.select_dtypes(exclude=['object']).columns
 
-    numeric_cols = numeric_cols.drop(['Driving_License', 'Previously_Insured', 'Response'])
+    if 'Response' in df.columns:
+        numeric_cols = numeric_cols.drop(['Driving_License', 'Previously_Insured', 'Response'])
+    else: 
+        numeric_cols = numeric_cols.drop(['Driving_License', 'Previously_Insured'])
 
     num_cols = 3  
     num_rows = (len(numeric_cols) + num_cols - 1) // num_cols
