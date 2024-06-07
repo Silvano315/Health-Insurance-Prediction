@@ -42,14 +42,12 @@ def evaluate_model(model, X, y):
 
 
 def plot_metrics_comparison(comparison_df):
-    # Define metrics columns
+
     metrics = ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'AUC']
 
-    # Reset the index to get 'Train' and 'Test' as a column for easier plotting
     comparison_df_reset = comparison_df.reset_index()
     comparison_df_reset.rename(columns={'level_0': 'Set', 'level_1': 'Model'}, inplace=True)
 
-    # Plot metrics comparison
     fig, axes = plt.subplots(3, 2, figsize=(15, 20))
     axes = axes.flatten()
 
@@ -60,7 +58,6 @@ def plot_metrics_comparison(comparison_df):
         axes[i].set_ylabel(metric)
         axes[i].legend(loc='best')
 
-    # Hide the last empty subplot if the number of metrics is odd
     if len(metrics) % 2 != 0:
         axes[-1].axis('off')
 
