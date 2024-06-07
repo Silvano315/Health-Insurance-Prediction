@@ -1,5 +1,6 @@
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_curve, roc_auc_score
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Params definitions for each ML model
 def get_param_dist_for_model(model_name):
@@ -23,15 +24,49 @@ def get_param_dist_for_model(model_name):
         raise ValueError(f"Unknown model name: {model_name}")
     
 
-def evaluate_model(model, X_test, y_test):
-    y_pred = model.predict(X_test)
-    accuracy = accuracy_score(y_test, y_pred)
-    precision = precision_score(y_test, y_pred)
-    recall = recall_score(y_test, y_pred)
-    f1 = f1_score(y_test, y_pred)
-    fpr, tpr, thresholds = roc_curve(y_test, model.predict_proba(X_test)[:,1])
-    auc = roc_auc_score(y_test, y_pred)
-    return accuracy, precision, recall, f1, fpr, tpr, auc
+def evaluate_model(model, X, y):
+    y_pred = model.predict(X)
+    accuracy = accuracy_score(y, y_pred)
+    precision = precision_score(y, y_pred)
+    recall = recall_score(y, y_pred)
+    f1 = f1_score(y, y_pred)
+    
+    if hasattr(model, "predict_proba"):
+        y_prob = model.predict_proba(X)[:, 1]
+    
+    auc = roc_auc_score(y, y_prob)
+    
+    fpr, tpr, _ = roc_curve(y, y_prob)
+    
+    return [accuracy, precision, recall, f1, auc, fpr, tpr]
+
+
+def plot_metrics_comparison(comparison_df):
+    # Define metrics columns
+    metrics = ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'AUC']
+
+    # Reset the index to get 'Train' and 'Test' as a column for easier plotting
+    comparison_df_reset = comparison_df.reset_index()
+    comparison_df_reset.rename(columns={'level_0': 'Set', 'level_1': 'Model'}, inplace=True)
+
+    # Plot metrics comparison
+    fig, axes = plt.subplots(3, 2, figsize=(15, 20))
+    axes = axes.flatten()
+
+    for i, metric in enumerate(metrics):
+        sns.barplot(x='Model', y=metric, hue='Set', data=comparison_df_reset, ax=axes[i])
+        axes[i].set_title(f'{metric} Comparison')
+        axes[i].set_xlabel('Model')
+        axes[i].set_ylabel(metric)
+        axes[i].legend(loc='best')
+
+    # Hide the last empty subplot if the number of metrics is odd
+    if len(metrics) % 2 != 0:
+        axes[-1].axis('off')
+
+    plt.tight_layout()
+    plt.show()
+
 
 def plot_roc_curves(results, set_type='train'):
     
@@ -49,7 +84,7 @@ def plot_roc_curves(results, set_type='train'):
         title = 'ROC Curve - Test Set'
 
     for name, scores in results_dict.items():
-        plt.plot(scores[4], scores[5], label=f'{name} (AUC = {scores[6]:.2f})')
+        plt.plot(scores[5], scores[6], label=f'{name} (AUC = {scores[4]:.2f})')
 
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
