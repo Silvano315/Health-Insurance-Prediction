@@ -76,6 +76,19 @@ Here are some of the results:
 
 #### Models with ADASYN
 
+Next, I immediately applied an oversampling technique, ADASYN. I chose this approach because I wanted a strategy that focused more on the complex data within the dataset. I performed the same procedures for searching for the best hyperparameters and evaluating the two models on both the new training dataset and the same 10% test set. The performances did not improve as much as I had hoped, demonstrating the difficulty of finding truly perfect patterns for such a large dataset. However, I managed to achieve significantly better results on the test set compared to the case without resampling and to quantitatively improve the XGBoost model.
+
+The latter proved to be much more stable and robust in performance between the training and test sets compared to the Random Forest, as indicated by the results and graphs, achieving an AUC of 84% (consistent with the results observed on Kaggle).
+
+| Set  | Model                  | Accuracy | Precision | Recall   | F1 Score | AUC     |
+|------|------------------------|----------|-----------|----------|----------|---------|
+| Train| XGBoost_with_ADASYN    | 0.861888 | 0.834770  | 0.908074 | 0.869880 | 0.949225|
+|      | Random Forest_with_ADASYN | 0.992461 | 0.992227  | 0.992949 | 0.992588 | 0.999782|
+| Test | XGBoost_with_ADASYN    | 0.789948 | 0.319647  | 0.622528 | 0.422404 | 0.835450|
+|      | Random Forest_with_ADASYN | 0.814693 | 0.315881  | 0.430567 | 0.364414 | 0.827877|
+
+![Alt text](images_for_ReadMe/Roc_Curve.png)
+
 ### Explainability with ELI5
 
 ## Conclusions
