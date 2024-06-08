@@ -56,9 +56,23 @@ I performed outlier detection and removal on the Annual Premium feature using Is
 For purely informational and visual purposes, I conducted a PCA analysis to determine how many components were needed to explain 90% of the variance, finding that six principal components were sufficient.
 
 Finally, I applied PCA to K-means clustering to see how the data points grouped into clusters (K found using the Elbow method) using two principal components. This analysis was intended to provide insights for potential future use cases with the test dataset, which did not include the target column.
+
 ### Machine Learning models
 
 #### Models without oversampling
+
+The Kaggle project required evaluating the model on the [training dataset](Data/train.csv)  by calculating the area under the curve (AUC) and visualizing the ROC curve.
+
+As an initial analysis, I split this dataset into a training set (90%) and a test set (10%). I conducted a RandomizedSearchCV for two ensemble models (robust for datasets without preprocessing and scaling) such as Random Forest and XGBoost. This technique was preferred as it didn't require excessive computational time, and performance was compared using the F1 score due to the imbalanced dataset. The performance was very good in terms of accuracy and AUC (as expected), but the models showed poor performance in metrics such as precision, recall, and F1 score, highlighting the issues of an imbalanced dataset. Specifically, performance dropped significantly on the 10% test set.
+
+Here are some of the results:
+
+| Set       | Model          | Accuracy | Precision | Recall  | F1 Score | AUC      |
+|-----------|----------------|----------|-----------|---------|----------|----------|
+| Train     | XGBoost        | 0.878245 | 0.661191  | 0.007764| 0.015348 | 0.862489 |
+|           | Random Forest  | 0.999856 | 0.999735  | 0.999084| 0.999409 | 1.000000 |
+| Test      | XGBoost        | 0.877231 | 0.671642  | 0.009673| 0.019072 | 0.860275 |
+|           | Random Forest  | 0.865986 | 0.364252  | 0.115649| 0.175559 | 0.832948 |
 
 #### Models with ADASYN
 
