@@ -10,8 +10,7 @@
        * [Models without oversampling](#models-without-oversampling)
        * [Models with ADASYN](#models-with-ADASYN)
    * [Explainability with ELI5](#explainability-with-ELI5)
-4. [Conclusions](#conclusions)
-5. [References](#references)
+4. [References](#references)
 
 ## Introduction
 
@@ -87,17 +86,37 @@ The latter proved to be much more stable and robust in performance between the t
 | Test | XGBoost_with_ADASYN    | 0.789948 | 0.319647  | 0.622528 | 0.422404 | 0.835450|
 |      | Random Forest_with_ADASYN | 0.814693 | 0.315881  | 0.430567 | 0.364414 | 0.827877|
 
-![Alt text](images_for_ReadMe/Roc_Curve.png)
+![Roc Curve](images_for_ReadMe/Roc_Curve.png)
 
 ### Explainability with ELI5
 
-## Conclusions
+Finally, I decided to incorporate an explanation section using ELI5 [[4](#ref4)], short for "Explain Like I'm 5". This is a Python library that provides tools for debugging machine learning models and explaining their predictions. It offers various methods for interpreting and understanding how a machine learning model works and why it makes certain predictions. ELI5 is model-agnostic, supporting all scikit-learn algorithms to explain both white-box models (such as Decision Trees) and black-box models (such as Keras with GRADCAM, XGBoost). It allows for regression and classification analysis, providing both global and local explanations.
+
+Analyzing a black box model like XGBoost, I performed a permutation model by calculating the importance of features by observing how much the score (accuracy, F1, R^2) decreases when a feature is not available.
+
+For each feature:
+
+1. Shuffle values in the provided dataset.
+2. Generate predictions using the model on the modified dataset.
+3. Compute the decrease in accuracy compared to before shuffling.
+4. Compare the impact on accuracy of shuffling each feature individually.
+
+A feature is considered "important" if shuffling its values increases the model error, indicating that the model relied on the feature for the prediction. Conversely, a feature is deemed "unimportant" if shuffling its values leaves the model error unchanged, suggesting that the model ignored the feature for the prediction. This process is repeated several times.
+
+This is the feature importance plot for global explanation:
+
+![Global Exp](images_for_ReadMe/feature_importance.png)
+
+As we can see, there are some interesting information XGBoost gave us from this explainability analysis. Previously Insured is the most important factor in determining whether a customer may want to purchase health insurance in the future. This is valuable information to provide to the company, as well as the third position occupied by Policy_Sales_Channel, highlighting the importance of the contact channel with the customer, e.g., agents, mail, telephone, in-person, etc. Surprisingly, the last place is held by the age of the vehicle, which clearly differs from the age of the customer.
+
+In [ELI% notebool](ELI5_explainability.ipynb), you can find also some plots about local explanation on single observation. This could be useful because it shows how for single subject the feature importance could change.
 
 ## References
 
 1. <a name="ref1"></a> https://www.insurance-research.org/research-publications/uninsured-motorists-2
 2. <a name="ref2"></a> https://www.businesswire.com/news/home/20231031282136/en/14-Percent-of-U.S.-Drivers-Were-Uninsured-in-2022-IRC-Estimates
 3. <a name="ref3"></a> https://www.opportunityinstitute.org/blog/post/why-you-cant-buy-health-insurance-like-auto-insurance/
+4. <a name="ref4"></a> https://github.com/TeamHG-Memex/eli5/
 
 
 
