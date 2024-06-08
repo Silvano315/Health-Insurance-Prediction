@@ -15,7 +15,11 @@
 
 ## Introduction
 
-This repository aims to test some machine learning and explainability techniques in order to predict whether the customer would be interested in Vehicle insurance, you have information about demographics, vehicles, policy
+The goal of this project is not to find perfect performance, but to reach a satisfactory benchmark level in line with other projects proposed on Kaggle. Using machine learning and explainability techniques, we analyze demographic, vehicle and policy data to develop models that predict interest in vehicle insurance with high accuracy. Additionally, we add an explainability section with ELI5 to help both customers and companies in business decision making by providing insights into the factors that influence these decisions. This can help insurance companies improve their strategies to increase adoption rates and ensure more comprehensive coverage.
+
+Vehicle insurance plays a critical role in safeguarding individuals against financial losses stemming from accidents, thefts, and other vehicle-related damages. By providing coverage for repair costs, medical expenses, and liability, vehicle insurance helps mitigate the economic impact of unforeseen events. 
+
+
 
 ## Dataset
 
@@ -36,6 +40,9 @@ Key observations:
 ## Methods and Results
 
 ### EDA
+
+
+
 
 ### Machine Learning models
 
