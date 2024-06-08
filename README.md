@@ -109,7 +109,7 @@ This is the feature importance plot for global explanation:
 
 As we can see, there are some interesting information XGBoost gave us from this explainability analysis. Previously Insured is the most important factor in determining whether a customer may want to purchase health insurance in the future. This is valuable information to provide to the company, as well as the third position occupied by Policy_Sales_Channel, highlighting the importance of the contact channel with the customer, e.g., agents, mail, telephone, in-person, etc. Surprisingly, the last place is held by the age of the vehicle, which clearly differs from the age of the customer.
 
-In [ELI5 notebool](ELI5_explainability.ipynb), you can find also some plots about local explanation on single observation. This could be useful because it shows how for single subject the feature importance could change.
+In [ELI5 notebook](ELI5_explainability.ipynb), you can find also some plots about local explanation on single observation. This could be useful because it shows how for single subject the feature importance could change.
 
 ## References
 
