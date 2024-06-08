@@ -19,7 +19,13 @@ The goal of this project is not to find perfect performance, but to reach a sati
 
 Vehicle insurance plays a critical role in safeguarding individuals against financial losses stemming from accidents, thefts, and other vehicle-related damages. By providing coverage for repair costs, medical expenses, and liability, vehicle insurance helps mitigate the economic impact of unforeseen events. 
 
+According to Insurance Research Council (IRC) [[1](#ref1)][[2](#ref2)], 14 Percent of U.S. Drivers Were Uninsured in 2022.
 
+Several factors contribute to this situation [[3](#ref3)], including:
+
+Lack of Awareness.
+Financial Constraints.
+Low Perceived Value.
 
 ## Dataset
 
@@ -56,7 +62,9 @@ Key observations:
 
 ## References
 
-
+1. <a name="ref1"></a> https://www.insurance-research.org/research-publications/uninsured-motorists-2
+2. <a name="ref2"></a> https://www.businesswire.com/news/home/20231031282136/en/14-Percent-of-U.S.-Drivers-Were-Uninsured-in-2022-IRC-Estimates
+3. <a name="ref3"></a> https://www.opportunityinstitute.org/blog/post/why-you-cant-buy-health-insurance-like-auto-insurance/
 
 
 
