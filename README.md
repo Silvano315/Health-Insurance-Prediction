@@ -23,9 +23,9 @@ According to Insurance Research Council (IRC) [[1](#ref1)][[2](#ref2)], 14 Perce
 
 Several factors contribute to this situation [[3](#ref3)], including:
 
-Lack of Awareness.
-Financial Constraints.
-Low Perceived Value.
+- Lack of Awareness.
+- Financial Constraints.
+- Low Perceived Value.
 
 ## Dataset
 
@@ -47,9 +47,15 @@ Key observations:
 
 ### EDA
 
+Regarding the EDA methods, I analyzed the distribution of numerical features, finding a positive skew for Annual Premium and a skewed distribution for Age. I observed how categorical features varied in relation to the target feature "Response," highlighting a significant imbalance in the dataset for class 0 (as expected for cases of this nature).
 
+After encoding the categorical features, I checked for obvious correlations between features (except for Age and Vehicle Age, which was expected).
 
+I performed outlier detection and removal on the Annual Premium feature using Isolation Forest, which visually suggested potential outliers. Given the large dataset, I wanted to use a more sophisticated method to identify outliers. I also tried the IQR method, but it was too strict, removing many data points. I opted for a less strict approach (with a contamination rate of 0.01) because I wasn't entirely convinced that removing too many points was necessary; the input of a domain expert would have been helpful. Applying a logistic transformation would have significantly improved the point distribution. In the end, I removed only 3,798 out of over 380,000 data points.
 
+For purely informational and visual purposes, I conducted a PCA analysis to determine how many components were needed to explain 90% of the variance, finding that six principal components were sufficient.
+
+Finally, I applied PCA to K-means clustering to see how the data points grouped into clusters (K found using the Elbow method) using two principal components. This analysis was intended to provide insights for potential future use cases with the test dataset, which did not include the target column.
 ### Machine Learning models
 
 #### Models without oversampling
