@@ -14,7 +14,7 @@
 
 ## Introduction
 
-The goal of this project is not to find perfect performance, but to reach a satisfactory benchmark level in line with other projects proposed on Kaggle. Using machine learning and explainability techniques, we analyze demographic, vehicle and policy data to develop models that predict interest in vehicle insurance with high accuracy. Additionally, we add an explainability section with ELI5 to help both customers and companies in business decision making by providing insights into the factors that influence these decisions. This can help insurance companies improve their strategies to increase adoption rates and ensure more comprehensive coverage.
+The goal of this project is not to find perfect performance, but to reach a satisfactory benchmark level in line with other projects proposed on Kaggle. Using machine learning and explainability techniques, I analyze demographic, vehicle and policy data to develop models that predict interest in vehicle insurance with high accuracy. Additionally, I add an explainability section with ELI5 to help both customers and companies in business decision making by providing insights into the factors that influence these decisions. This can help insurance companies improve their strategies to increase adoption rates and ensure more comprehensive coverage.
 
 Vehicle insurance plays a critical role in safeguarding individuals against financial losses stemming from accidents, thefts, and other vehicle-related damages. By providing coverage for repair costs, medical expenses, and liability, vehicle insurance helps mitigate the economic impact of unforeseen events. 
 
@@ -107,7 +107,7 @@ This is the feature importance plot for global explanation:
 
 ![Global Exp](images_for_ReadMe/feature_importance.png)
 
-As we can see, there are some interesting information XGBoost gave us from this explainability analysis. Previously Insured is the most important factor in determining whether a customer may want to purchase health insurance in the future. This is valuable information to provide to the company, as well as the third position occupied by Policy_Sales_Channel, highlighting the importance of the contact channel with the customer, e.g., agents, mail, telephone, in-person, etc. Surprisingly, the last place is held by the age of the vehicle, which clearly differs from the age of the customer.
+As you can see, there are some interesting information XGBoost gave us from this explainability analysis. Previously Insured is the most important factor in determining whether a customer may want to purchase health insurance in the future. This is valuable information to provide to the company, as well as the third position occupied by Policy_Sales_Channel, highlighting the importance of the contact channel with the customer, e.g., agents, mail, telephone, in-person, etc. Surprisingly, the last place is held by the age of the vehicle, which clearly differs from the age of the customer.
 
 In [ELI5 notebook](ELI5_explainability.ipynb), you can find also some plots about local explanation on single observation. This could be useful because it shows how for single subject the feature importance could change.
 
